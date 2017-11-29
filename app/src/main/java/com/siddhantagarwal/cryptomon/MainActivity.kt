@@ -1,45 +1,44 @@
 package com.siddhantagarwal.cryptomon
 
+import android.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import org.json.JSONObject
-import kotlin.concurrent.thread
+import android.support.design.widget.BottomNavigationView
+import android.util.Log
+
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var bottomNavigationView: BottomNavigationView
+    lateinit var watchFragment: WatchFragment
+    lateinit var personalFragment: PersonalFragment
+    var TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val mainRecyclerView = findViewById<RecyclerView>(R.id.main_recycler_view)
-        val refreshLayout = findViewById<SwipeRefreshLayout>(R.id.swipe_refresh_layout)
-        val listCurrencies = ArrayList<Currency>()
-        val adapter = MainAdapter(listCurrencies, this)
-        refreshLayout.setOnRefreshListener {
-            refreshLayout.isRefreshing = true
-            refreshDataFromServer(listCurrencies, adapter)
-            refreshLayout.isRefreshing = false
+        bottomNavigationView = findViewById(R.id.bottom_navigation_view)
+        bottomNavigationView.setOnNavigationItemSelectedListener {
+           when(it.itemId) {
+               R.id.watch_tab -> pushFragment(watchFragment)
+               R.id.personal_tab -> pushFragment(personalFragment)
+               else -> Log.d(TAG, "I am also looking for satoshi nakamoto")
+           }
+           true
         }
-        mainRecyclerView.layoutManager = LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL,
-                false)
-        mainRecyclerView.adapter = adapter
-        refreshDataFromServer(listCurrencies, adapter)
+        watchFragment = WatchFragment()
+        personalFragment = PersonalFragment()
+        pushFragment(watchFragment)
     }
 
-    private fun refreshDataFromServer(listCurrencies: ArrayList<Currency>, adapter: MainAdapter) {
-        thread {
-            val response = Utility.fetchDataFromURL(getString(R.string.url_for_data))
-            response?.let {
-                listCurrencies.clear()
-                val currencyList = JSONObject(it).getJSONObject("prices")
-                for (key in currencyList.keys()) {
-                    listCurrencies.add(Currency(key, currencyList[key].toString().toDouble()))
-                }
-                runOnUiThread {
-                    adapter.notifyItemRangeChanged(0, listCurrencies.size)
+    private fun pushFragment(fragment: Fragment) {
+        fragment.let {
+            fragmentManager?.let {
+                it.beginTransaction().let {
+                    it.let {
+                        it.replace(R.id.root_layout, fragment)
+                        it.commit()
+                    }
                 }
             }
         }

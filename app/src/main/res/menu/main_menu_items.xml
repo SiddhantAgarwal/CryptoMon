@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/watch_tab"
+        android:title="Watch"
+        android:icon="@drawable/ic_trending_up_black_24dp" />
+    <item android:id="@+id/personal_tab"
+        android:title="Personal"
+        android:icon="@drawable/ic_perm_identity_black_24dp" />
+</menu>

@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.siddhantagarwal.cryptomon.MainActivity">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
+    <FrameLayout
+        android:id="@+id/root_layout"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        >
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/main_recycler_view"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            />
-    </android.support.v4.widget.SwipeRefreshLayout>
+        android:layout_above="@+id/bottom_navigation_view"
+        />
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        android:background="@color/colorPrimary"
+        app:menu="@menu/main_menu_items"/>
+
+</RelativeLayout>

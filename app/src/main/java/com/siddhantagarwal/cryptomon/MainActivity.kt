@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.TextView
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -25,30 +24,13 @@ class MainActivity : AppCompatActivity() {
         val adapter = MainAdapter(listCurrencies)
         mainRecyclerView.adapter = adapter
         thread {
-            val response = fetchDataFromURL(getString(R.string.url_for_data))
+            val response = Utility.fetchDataFromURL(getString(R.string.url_for_data))
             runOnUiThread {
                 val currencyList = JSONObject(response).getJSONObject("prices")
                 for (key in currencyList.keys()) {
                     listCurrencies.add(Currency(key,  currencyList[key].toString().toDouble()))
                 }
                 adapter.notifyDataSetChanged()
-            }
-        }
-    }
-
-    private fun fetchDataFromURL(url: String): String {
-        val urlObject = URL(url)
-        with(urlObject.openConnection() as HttpURLConnection) {
-            BufferedReader(InputStreamReader(inputStream)).use {
-                val response = StringBuffer()
-                var inputLine = it.readLine()
-                response.append(inputLine)
-                while (inputLine != null) {
-                    inputLine = it.readLine()
-                    response.append(inputLine)
-                }
-                inputStream.close()
-                return response.toString()
             }
         }
     }

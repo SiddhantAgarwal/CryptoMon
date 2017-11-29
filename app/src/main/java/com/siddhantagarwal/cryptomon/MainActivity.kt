@@ -4,7 +4,6 @@ import android.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.util.Log
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
            when(it.itemId) {
                R.id.watch_tab -> pushFragment(watchFragment)
                R.id.personal_tab -> pushFragment(personalFragment)
-               else -> Log.d(TAG, "I am also looking for satoshi nakamoto")
+               else -> Utility.LogDebug(TAG, "I am also looking for satoshi nakamoto")
            }
            true
         }

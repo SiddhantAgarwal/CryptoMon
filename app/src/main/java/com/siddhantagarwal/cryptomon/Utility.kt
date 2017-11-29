@@ -32,5 +32,17 @@ class Utility {
                 }
             }
         }
+
+        fun LogDebug(tag: String, message: String) {
+            if(Config.debugMode) {
+                Log.d(tag, message)
+            }
+        }
+
+        fun LogError(tag: String, message: String) {
+            if(Config.debugMode) {
+                Log.e(tag, message)
+            }
+        }
     }
 }

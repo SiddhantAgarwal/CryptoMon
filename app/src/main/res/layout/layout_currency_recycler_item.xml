@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="BTC"
+                android:textStyle="bold"
                 android:layout_alignTop="@+id/currency_symbol_imageview"
                 android:layout_marginLeft="16dp"
                 android:layout_toEndOf="@+id/currency_symbol_imageview"

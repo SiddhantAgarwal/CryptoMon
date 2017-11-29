@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CryptoMon</string>
+    <string name="url_for_data">https://koinex.in/api/ticker</string>
+</resources>

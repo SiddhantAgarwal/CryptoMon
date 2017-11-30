@@ -18,12 +18,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigationView.setOnNavigationItemSelectedListener {
-           when(it.itemId) {
-               R.id.watch_tab -> pushFragment(watchFragment)
-               R.id.personal_tab -> pushFragment(personalFragment)
-               else -> Utility.LogDebug(TAG, "I am also looking for satoshi nakamoto")
-           }
-           true
+            when (it.itemId) {
+                R.id.watch_tab -> pushFragment(watchFragment)
+                R.id.personal_tab -> pushFragment(personalFragment)
+                else -> Utility.LogDebug(TAG, "I am also looking for satoshi nakamoto")
+            }
+            true
         }
         watchFragment = WatchFragment()
         personalFragment = PersonalFragment()

@@ -8,10 +8,10 @@ import android.support.design.widget.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var bottomNavigationView: BottomNavigationView
-    lateinit var watchFragment: WatchFragment
-    lateinit var personalFragment: PersonalFragment
-    var TAG = "MainActivity"
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var watchFragment: WatchFragment
+    private lateinit var personalFragment: PersonalFragment
+    private var TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

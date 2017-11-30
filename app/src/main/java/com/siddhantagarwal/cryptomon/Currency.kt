@@ -5,7 +5,7 @@ package com.siddhantagarwal.cryptomon
  */
 
 data class Currency(val code: String,
-                    val value: Double,
-                    val ltp: Double = 0.0,
-                    val la: Double = 0.0,
-                    val hb: Double = 0.0)
+                    val value: Double?,
+                    val ltp: Double? = 0.0,
+                    val la: Double? = 0.0,
+                    val hb: Double? = 0.0)

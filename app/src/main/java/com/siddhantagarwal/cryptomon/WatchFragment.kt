@@ -15,7 +15,7 @@ import kotlin.concurrent.thread
  * Created by siddhant on 30/11/17.
  */
 class WatchFragment: Fragment() {
-    lateinit var listCurrencies: ArrayList<Currency>
+    lateinit var listCurrencies: ArrayList<HashMap<String, Any>>
     lateinit var watchRecylerView: RecyclerView
     lateinit var adapter: MainAdapter
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
@@ -43,14 +43,34 @@ class WatchFragment: Fragment() {
         swipeRefreshLayout.isRefreshing = false
     }
 
-    private fun refreshDataFromServer(listCurrencies: ArrayList<Currency>, adapter: MainAdapter) {
+    private fun refreshDataFromServer(listCurrencies: ArrayList<HashMap<String, Any>>, adapter: MainAdapter) {
         thread {
             val response = Utility.fetchDataFromURL(getString(R.string.url_for_data))
             response?.let {
                 listCurrencies.clear()
                 val currencyList = JSONObject(it).getJSONObject("prices")
+                val map = HashMap<String, HashMap<String, String>>()
                 for (key in currencyList.keys()) {
-                    listCurrencies.add(Currency(key, currencyList[key].toString().toDouble()))
+                    map[key] = HashMap()
+                    map[key]?.set("value", currencyList[key].toString())
+                }
+                val detailList = JSONObject(it).getJSONObject("stats")
+                for (key in detailList.keys()) {
+                    val subDetailList = JSONObject(detailList[key].toString())
+                    map[key]?.set("ltp", subDetailList["last_traded_price"].toString())
+                    map[key]?.set("la", subDetailList["lowest_ask"].toString())
+                    map[key]?.set("hb", subDetailList["highest_bid"].toString())
+                }
+                for (entry in map) {
+                    val tempMap = HashMap<String, Any>()
+                    tempMap["currency"] = Currency(entry.key,
+                            entry.value["value"]?.toDouble(),
+                            entry.value["ltp"]?.toDouble(),
+                            entry.value["la"]?.toDouble(),
+                            entry.value["hb"]?.toDouble()
+                    )
+                    tempMap["expanded"] = false
+                    listCurrencies.add(tempMap)
                 }
                 activity.runOnUiThread {
                     adapter.notifyItemRangeChanged(0, listCurrencies.size)

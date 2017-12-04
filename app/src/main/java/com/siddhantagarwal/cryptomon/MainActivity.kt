@@ -1,17 +1,13 @@
 package com.siddhantagarwal.cryptomon
 
-import android.app.Activity
 import android.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
 
-//    private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var watchFragment: WatchFragment
     private lateinit var personalFragment: PersonalFragment
     private var TAG = "MainActivity"

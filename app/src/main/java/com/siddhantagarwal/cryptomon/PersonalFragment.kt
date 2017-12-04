@@ -5,13 +5,13 @@ import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import com.orm.SugarRecord
 import kotlinx.android.synthetic.main.layout_add_transaction_popup.*
+import kotlinx.android.synthetic.main.layout_add_transaction_popup.view.*
 import kotlinx.android.synthetic.main.layout_fragment_personal.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.thread
@@ -52,7 +52,7 @@ class PersonalFragment : Fragment() {
         try {
             transactionArrayList = ArrayList()
             SugarRecord.findAll(TransactionCrypto::class.java).forEach {
-                Utility.logDebug("tr", it.toString())
+                Utility.logDebug("Transaction", it.toString())
                 transactionArrayList.add(it)
             }
             transactionRecyclerView.adapter.notifyDataSetChanged()
@@ -66,9 +66,10 @@ class PersonalFragment : Fragment() {
             val builder: AlertDialog.Builder = AlertDialog.Builder(it)
             val view = LayoutInflater.from(it).inflate(R.layout.layout_add_transaction_popup, null)
             builder.setView(view)
-            add_button.setOnClickListener {
-                val transaction = TransactionCrypto(currency_code_edit_text.text.toString(),
-                        amount_edit_text.text.toString().toDouble(),
+            currency_code_edit_text
+            view.add_button.setOnClickListener {
+                val transaction = TransactionCrypto(view.currency_code_edit_text.text.toString(),
+                        view.amount_edit_text.text.toString().toDouble(),
                         quantity_edit_text.text.toString().toDouble(),
                         rate_edit_text.text.toString().toDouble())
                 thread {

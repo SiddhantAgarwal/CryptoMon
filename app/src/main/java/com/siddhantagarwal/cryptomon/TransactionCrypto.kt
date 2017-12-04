@@ -5,7 +5,7 @@ import com.orm.SugarRecord
 /**
  * Created by siddhant on 01/12/17.
  */
-data class Transaction(val currencyCode: String,
+data class TransactionCrypto(val currencyCode: String,
                        val amount: Double,
                        val quantity: Double,
-                       val rate: Double): SugarRecord<Transaction>()
+                       val rate: Double): SugarRecord()

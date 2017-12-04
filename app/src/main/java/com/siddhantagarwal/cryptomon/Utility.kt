@@ -1,6 +1,7 @@
 package com.siddhantagarwal.cryptomon
 
 import android.util.Log
+import android.widget.TextView
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
@@ -33,13 +34,19 @@ class Utility {
             }
         }
 
-        fun LogDebug(tag: String, message: String) {
+        fun Log.debug(tag: String, message: String) {
             if(Config.debugMode) {
                 Log.d(tag, message)
             }
         }
 
-        fun LogError(tag: String, message: String) {
+        fun logDebug(tag: String, message: String) {
+            if(Config.debugMode) {
+                Log.d(tag, message)
+            }
+        }
+
+        fun logError(tag: String, message: String?) {
             if(Config.debugMode) {
                 Log.e(tag, message)
             }

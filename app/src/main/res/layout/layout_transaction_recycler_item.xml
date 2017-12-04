@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:padding="4dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/quantity_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="1"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/currency_code_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/quantity_text_view"
+                android:layout_marginLeft="8dp"
+                android:text="BTC"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/valuation_text_view"
+                android:layout_below="@id/currency_code_text_view"
+                android:layout_marginLeft="8dp"
+                android:text="@string/currency_valuation_string"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/total_amount_text_view"
+                android:layout_below="@id/valuation_text_view"
+                android:layout_marginLeft="8dp"
+                android:text="@string/currency_value_string"
+                android:textSize="20dp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>

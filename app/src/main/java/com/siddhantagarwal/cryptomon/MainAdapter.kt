@@ -2,23 +2,17 @@ package com.siddhantagarwal.cryptomon
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.transition.TransitionManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
+import kotlinx.android.synthetic.main.layout_currency_recycler_item.view.*
 
 /**
  * Created by siddhant on 29/11/17.
  */
 
 class MainAdapter(private val dataList: ArrayList<HashMap<String, Any>>, val context: Context) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
-
-    lateinit var recyclerView: RecyclerView
 
     override fun getItemCount(): Int {
         return dataList.size
@@ -27,7 +21,6 @@ class MainAdapter(private val dataList: ArrayList<HashMap<String, Any>>, val con
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MainAdapter.ViewHolder {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.layout_currency_recycler_item,
                 parent, false)
-        recyclerView = parent as RecyclerView
         return ViewHolder(v)
     }
 
@@ -37,53 +30,46 @@ class MainAdapter(private val dataList: ArrayList<HashMap<String, Any>>, val con
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItems(entry: HashMap<String, Any>) {
-            val currencyNameTextView = itemView.findViewById<TextView>(R.id.currency_name_textview)
-            val currencyPriceTextView = itemView.findViewById<TextView>(R.id.currency_value_textview)
-            val currencySymbolImageView = itemView.findViewById<ImageView>(R.id.currency_symbol_imageview)
-            val lastTradedPriceTextView = itemView.findViewById<TextView>(R.id.last_traded_price_textView)
-            val lowestAskTextView = itemView.findViewById<TextView>(R.id.lowest_ask_textView)
-            val highestBidTextView = itemView.findViewById<TextView>(R.id.highest_bid_textView)
-            val expandButton = itemView.findViewById<ImageView>(R.id.more_button)
             with(entry["currency"] as Currency) {
-                currencyNameTextView.text = code
+                itemView.currency_name_textview.text = code
 
-                currencyPriceTextView.text = ""
+                itemView.currency_value_textview.text = ""
                 value?.let {
                     val currValue = context.getString(R.string.currency_value_string, it.toString())
-                    currencyPriceTextView.text = currValue
+                    itemView.currency_value_textview.text = currValue
                 }
 
-                lastTradedPriceTextView.text = ""
+                itemView.last_traded_price_textView.text = ""
                 ltp?.let {
                     val ltpValue = context.getString(R.string.currency_value_string, it.toString())
-                    lastTradedPriceTextView.text = ltpValue
+                    itemView.last_traded_price_textView.text = ltpValue
                 }
 
-                highestBidTextView.text = ""
+                itemView.highest_bid_textView.text = ""
                 hb?.let {
                     val hbValue = context.getString(R.string.currency_value_string, it.toString())
-                    highestBidTextView.text = hbValue
+                    itemView.highest_bid_textView.text = hbValue
                 }
 
-                lowestAskTextView.text = ""
+                itemView.lowest_ask_textView.text = ""
                 la?.let {
                     val laValue = context.getString(R.string.currency_value_string, it.toString())
-                    lowestAskTextView.text = laValue
+                    itemView.lowest_ask_textView.text = laValue
                 }
                 val resourceId = context.resources.getIdentifier(code.toLowerCase(), "drawable", context.packageName)
-                currencySymbolImageView.setImageDrawable(context.getDrawable(resourceId))
+                itemView.currency_symbol_imageview.setImageDrawable(context.getDrawable(resourceId))
             }
 
-            expandButton.setOnClickListener {
+            itemView.more_button.setOnClickListener {
                 val detailsView = itemView.findViewById<LinearLayout>(R.id.details_layout)
                 if (entry["expanded"] as Boolean) {
                     detailsView.visibility = View.GONE
                     entry["expanded"] = false
-                    expandButton.setImageResource(R.drawable.ic_expand)
+                    itemView.more_button.setImageResource(R.drawable.ic_expand)
                 } else {
                     detailsView.visibility = View.VISIBLE
                     entry["expanded"] = true
-                    expandButton.setImageResource(R.drawable.ic_expand_less_black_24dp)
+                    itemView.more_button.setImageResource(R.drawable.ic_expand_less_black_24dp)
                 }
             }
         }

@@ -32,6 +32,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/currency_code_edit_text"
             />
     </LinearLayout>
     <LinearLayout
@@ -49,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
+            android:id="@+id/amount_edit_text"
             />
     </LinearLayout>
     <LinearLayout
@@ -67,6 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
+            android:id="@+id/quantity_edit_text"
             />
     </LinearLayout>
     <LinearLayout
@@ -84,7 +87,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
+            android:id="@+id/rate_edit_text"
             />
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/add_button"
+            android:layout_alignParentRight="true"
+            android:text="Add"
+            android:layout_marginRight="8dp"
+            />
+    </RelativeLayout>
 
 </LinearLayout>

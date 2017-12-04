@@ -2,12 +2,11 @@ package com.siddhantagarwal.cryptomon
 
 import android.app.Fragment
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.layout_fragment_watch.*
 import org.json.JSONObject
 import kotlin.concurrent.thread
 
@@ -15,32 +14,31 @@ import kotlin.concurrent.thread
  * Created by siddhant on 30/11/17.
  */
 class WatchFragment: Fragment() {
-    lateinit var listCurrencies: ArrayList<HashMap<String, Any>>
-    lateinit var watchRecylerView: RecyclerView
-    lateinit var adapter: MainAdapter
-    lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var listCurrencies: ArrayList<HashMap<String, Any>>
+    private lateinit var adapter: MainAdapter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val view = inflater!!.inflate(R.layout.layout_fragment_watch, container, false)
-        watchRecylerView = view.findViewById(R.id.watch_recycler_view)
+        return inflater!!.inflate(R.layout.layout_fragment_watch, container, false)
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         listCurrencies = ArrayList()
         adapter = MainAdapter(listCurrencies, activity)
-        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout)
-        watchRecylerView.layoutManager = LinearLayoutManager(activity,
+        watch_recycler_view?.layoutManager = LinearLayoutManager(activity,
                 LinearLayoutManager.VERTICAL,
                 false)
-        swipeRefreshLayout.setOnRefreshListener {
+        swipe_refresh_layout?.setOnRefreshListener {
             refreshRecycler()
         }
-        watchRecylerView.adapter = adapter
+        watch_recycler_view?.adapter = adapter
         refreshRecycler()
-        return view
     }
 
     private fun refreshRecycler() {
-        swipeRefreshLayout.isRefreshing = true
+        swipe_refresh_layout.isRefreshing = true
         refreshDataFromServer(listCurrencies, adapter)
-        swipeRefreshLayout.isRefreshing = false
+        swipe_refresh_layout.isRefreshing = false
     }
 
     private fun refreshDataFromServer(listCurrencies: ArrayList<HashMap<String, Any>>, adapter: MainAdapter) {
@@ -72,7 +70,7 @@ class WatchFragment: Fragment() {
                     tempMap["expanded"] = false
                     listCurrencies.add(tempMap)
                 }
-                activity.runOnUiThread {
+                activity?.runOnUiThread {
                     adapter.notifyItemRangeChanged(0, listCurrencies.size)
                 }
             }

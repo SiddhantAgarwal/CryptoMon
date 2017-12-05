@@ -1,4 +1,4 @@
-package com.siddhantagarwal.cryptomon
+package com.siddhantagarwal.cryptomon.models
 
 import com.orm.SugarRecord
 

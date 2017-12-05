@@ -1,16 +1,19 @@
-package com.siddhantagarwal.cryptomon
+package com.siddhantagarwal.cryptomon.ui.fragments
 
 import android.app.AlertDialog
 import android.app.Fragment
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
 import com.orm.SugarRecord
+import com.siddhantagarwal.cryptomon.R
+import com.siddhantagarwal.cryptomon.models.TransactionCrypto
+import com.siddhantagarwal.cryptomon.adapters.TransactionRecyclerAdapter
+import com.siddhantagarwal.cryptomon.Utility
 import kotlinx.android.synthetic.main.layout_add_transaction_popup.view.*
 import kotlinx.android.synthetic.main.layout_fragment_personal.*
 import kotlin.collections.ArrayList
@@ -37,7 +40,7 @@ class PersonalFragment : Fragment() {
             addTransactionDialog?.show()
         }
         transactionArrayList = ArrayList()
-        val adapter = TransactionRecyclerAdapter(transactionArrayList, activity)
+        val adapter = TransactionRecyclerAdapter(transactionArrayList, activity as AppCompatActivity)
         transaction_recycler_view.layoutManager = LinearLayoutManager(activity,
                 RecyclerView.VERTICAL, false)
         transaction_recycler_view.adapter = adapter

@@ -9,9 +9,10 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+class UtilityTests {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun fetchUrlFunctionTest() {
+        val resp = Utility.fetchDataFromURL("https://www.google.com")
+        assertTrue(resp is String && resp != "")
     }
 }

@@ -1,4 +1,4 @@
-package com.siddhantagarwal.cryptomon
+package com.siddhantagarwal.cryptomon.adapters
 
 import android.app.AlertDialog
 import android.content.Context
@@ -8,6 +8,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.orm.SugarRecord
+import com.siddhantagarwal.cryptomon.R
+import com.siddhantagarwal.cryptomon.models.TransactionCrypto
+import com.siddhantagarwal.cryptomon.Utility
 import kotlinx.android.synthetic.main.layout_add_transaction_popup.view.*
 import kotlinx.android.synthetic.main.layout_transaction_recycler_item.view.*
 import java.util.*
@@ -22,11 +26,11 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
         return transactionList.size
     }
 
-    override fun onBindViewHolder(holder: TransactionRecyclerAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(transactionList[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TransactionRecyclerAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.layout_transaction_recycler_item,
                 parent, false)
         return ViewHolder(v)

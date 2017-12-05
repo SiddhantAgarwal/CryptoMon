@@ -34,12 +34,6 @@ class Utility {
             }
         }
 
-        fun Log.debug(tag: String, message: String) {
-            if(Config.debugMode) {
-                Log.d(tag, message)
-            }
-        }
-
         fun logDebug(tag: String, message: String) {
             if(Config.debugMode) {
                 Log.d(tag, message)

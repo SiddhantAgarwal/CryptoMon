@@ -1,4 +1,4 @@
-package com.siddhantagarwal.cryptomon
+package com.siddhantagarwal.cryptomon.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.siddhantagarwal.cryptomon.models.Currency
+import com.siddhantagarwal.cryptomon.R
 import kotlinx.android.synthetic.main.layout_currency_recycler_item.view.*
 
 /**
@@ -18,13 +20,13 @@ class MainAdapter(private val dataList: ArrayList<HashMap<String, Any>>, val con
         return dataList.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MainAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.layout_currency_recycler_item,
                 parent, false)
         return ViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: MainAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(dataList[position])
     }
 

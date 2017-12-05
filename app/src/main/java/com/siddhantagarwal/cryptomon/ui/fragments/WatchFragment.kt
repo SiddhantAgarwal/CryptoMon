@@ -1,4 +1,4 @@
-package com.siddhantagarwal.cryptomon
+package com.siddhantagarwal.cryptomon.ui.fragments
 
 import android.app.Fragment
 import android.os.Bundle
@@ -7,6 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.orm.SugarRecord
+import com.siddhantagarwal.cryptomon.models.Currency
+import com.siddhantagarwal.cryptomon.adapters.MainAdapter
+import com.siddhantagarwal.cryptomon.R
+import com.siddhantagarwal.cryptomon.Utility
+import com.siddhantagarwal.cryptomon.models.TransactionCrypto
 import kotlinx.android.synthetic.main.layout_fragment_watch.*
 import org.json.JSONObject
 import kotlin.concurrent.thread
@@ -14,7 +19,7 @@ import kotlin.concurrent.thread
 /**
  * Created by siddhant on 30/11/17.
  */
-class WatchFragment: Fragment() {
+class WatchFragment : Fragment() {
     private lateinit var listCurrencies: ArrayList<HashMap<String, Any>>
     private lateinit var adapter: MainAdapter
 
@@ -60,24 +65,34 @@ class WatchFragment: Fragment() {
                     map[key]?.set("la", subDetailList["lowest_ask"].toString())
                     map[key]?.set("hb", subDetailList["highest_bid"].toString())
                 }
-                SugarRecord.deleteAll(Currency::class.java)
                 for (entry in map) {
-                    Currency(entry.key,
-                            entry.value["value"]?.toDouble(),
-                            entry.value["ltp"]?.toDouble(),
-                            entry.value["la"]?.toDouble(),
-                            entry.value["hb"]?.toDouble()
-                    ).save()
+                    val record = SugarRecord.find(Currency::class.java,
+                            "CODE = '${entry.key}'")
+                    if (record.size != 0) {
+                        record[0].apply {
+                            value = entry.value["value"]?.toDouble()
+                            ltp = entry.value["ltp"]?.toDouble()
+                            la = entry.value["la"]?.toDouble()
+                            hb = entry.value["hb"]?.toDouble()
+                        }.save()
+                    } else {
+                        Currency(entry.key,
+                                entry.value["value"]?.toDouble(),
+                                entry.value["ltp"]?.toDouble(),
+                                entry.value["la"]?.toDouble(),
+                                entry.value["hb"]?.toDouble()
+                        ).save()
+                    }
                 }
-                SugarRecord.findAll(Currency::class.java).forEach {
-                    val mapOb = HashMap<String, Any>()
-                    mapOb["expanded"] = false
-                    mapOb["currency"] = it
-                    listCurrencies.add(mapOb)
-                }
-                activity?.runOnUiThread {
-                    adapter.notifyItemRangeChanged(0, listCurrencies.size)
-                }
+            }
+            SugarRecord.findAll(Currency::class.java).forEach {
+                val mapOb = HashMap<String, Any>()
+                mapOb["expanded"] = false
+                mapOb["currency"] = it
+                listCurrencies.add(mapOb)
+            }
+            activity?.runOnUiThread {
+                adapter.notifyItemRangeChanged(0, listCurrencies.size)
             }
         }
     }

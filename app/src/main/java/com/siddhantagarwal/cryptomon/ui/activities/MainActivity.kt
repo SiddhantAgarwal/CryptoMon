@@ -1,8 +1,12 @@
-package com.siddhantagarwal.cryptomon
+package com.siddhantagarwal.cryptomon.ui.activities
 
 import android.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.siddhantagarwal.cryptomon.ui.fragments.PersonalFragment
+import com.siddhantagarwal.cryptomon.R
+import com.siddhantagarwal.cryptomon.Utility
+import com.siddhantagarwal.cryptomon.ui.fragments.WatchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 

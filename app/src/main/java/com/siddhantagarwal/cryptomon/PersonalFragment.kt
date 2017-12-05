@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import com.orm.SugarRecord
-import kotlinx.android.synthetic.main.layout_add_transaction_popup.*
 import kotlinx.android.synthetic.main.layout_add_transaction_popup.view.*
 import kotlinx.android.synthetic.main.layout_fragment_personal.*
 import kotlin.collections.ArrayList
@@ -24,7 +23,8 @@ import kotlin.concurrent.thread
 class PersonalFragment : Fragment() {
     private lateinit var transactionArrayList: ArrayList<TransactionCrypto>
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
         return inflater!!.inflate(R.layout.layout_fragment_personal, container, false)
     }
 
@@ -38,7 +38,8 @@ class PersonalFragment : Fragment() {
         }
         transactionArrayList = ArrayList()
         val adapter = TransactionRecyclerAdapter(transactionArrayList, activity)
-        transaction_recycler_view.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        transaction_recycler_view.layoutManager = LinearLayoutManager(activity,
+                RecyclerView.VERTICAL, false)
         transaction_recycler_view.adapter = adapter
         swipe_refresh_layout.setOnRefreshListener {
             swipe_refresh_layout.isRefreshing = true
@@ -64,7 +65,8 @@ class PersonalFragment : Fragment() {
     private fun createAddTransactionDialog(): AlertDialog? {
         activity?.let {
             val builder: AlertDialog.Builder = AlertDialog.Builder(it)
-            val view = LayoutInflater.from(it).inflate(R.layout.layout_add_transaction_popup, null)
+            val view = LayoutInflater.from(it).inflate(R.layout.layout_add_transaction_popup,
+                    null)
             builder.setView(view)
             val dialog = builder.create()
             val handler = Handler()

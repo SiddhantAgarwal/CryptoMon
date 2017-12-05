@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.orm.SugarRecord
 import kotlinx.android.synthetic.main.layout_fragment_watch.*
 import org.json.JSONObject
 import kotlin.concurrent.thread
@@ -59,16 +60,20 @@ class WatchFragment: Fragment() {
                     map[key]?.set("la", subDetailList["lowest_ask"].toString())
                     map[key]?.set("hb", subDetailList["highest_bid"].toString())
                 }
+                SugarRecord.deleteAll(Currency::class.java)
                 for (entry in map) {
-                    val tempMap = HashMap<String, Any>()
-                    tempMap["currency"] = Currency(entry.key,
+                    Currency(entry.key,
                             entry.value["value"]?.toDouble(),
                             entry.value["ltp"]?.toDouble(),
                             entry.value["la"]?.toDouble(),
                             entry.value["hb"]?.toDouble()
-                    )
-                    tempMap["expanded"] = false
-                    listCurrencies.add(tempMap)
+                    ).save()
+                }
+                SugarRecord.findAll(Currency::class.java).forEach {
+                    val mapOb = HashMap<String, Any>()
+                    mapOb["expanded"] = false
+                    mapOb["currency"] = it
+                    listCurrencies.add(mapOb)
                 }
                 activity?.runOnUiThread {
                     adapter.notifyItemRangeChanged(0, listCurrencies.size)

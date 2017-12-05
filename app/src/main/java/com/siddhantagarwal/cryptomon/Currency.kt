@@ -1,11 +1,26 @@
 package com.siddhantagarwal.cryptomon
 
+import com.orm.SugarRecord
+
 /**
  * Created by siddhant on 29/11/17.
  */
 
-data class Currency(val code: String,
-                    val value: Double?,
-                    val ltp: Double? = 0.0,
-                    val la: Double? = 0.0,
-                    val hb: Double? = 0.0)
+/**
+ * Didn't use kotlin data class because need a empty constructor
+ */
+
+class Currency(): SugarRecord() {
+    var code: String? = ""
+    var value: Double? = 0.0
+    var ltp: Double? = null
+    var la: Double? = null
+    var hb: Double? = null
+    constructor(code: String?, value: Double?, ltp: Double?, la: Double?, hb: Double?) : this() {
+        this.code = code
+        this.value = value
+        this.ltp = ltp
+        this.la = la
+        this.hb = hb
+    }
+}

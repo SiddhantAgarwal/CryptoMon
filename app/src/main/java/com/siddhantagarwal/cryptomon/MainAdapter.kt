@@ -56,7 +56,7 @@ class MainAdapter(private val dataList: ArrayList<HashMap<String, Any>>, val con
                     itemView.lowest_ask_textView.text = context.getString(
                             R.string.currency_value_string, it.toString())
                 }
-                val resourceId = context.resources.getIdentifier(code.toLowerCase(), "drawable", context.packageName)
+                val resourceId = context.resources.getIdentifier(code?.toLowerCase(), "drawable", context.packageName)
                 itemView.currency_symbol_imageview.setImageDrawable(context.getDrawable(resourceId))
             }
 

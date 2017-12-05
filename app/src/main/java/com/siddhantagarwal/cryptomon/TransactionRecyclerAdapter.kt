@@ -2,6 +2,7 @@ package com.siddhantagarwal.cryptomon
 
 import android.app.AlertDialog
 import android.content.Context
+import android.os.Handler
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -46,7 +47,7 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                         val handler = android.os.Handler()
                         when(it.itemId) {
                             R.id.update -> {
-                                updateTransaction(transaction)
+                                updateTransaction(transaction, adapterPosition)
                                 handler.postDelayed({
                                     if(adapterPosition != RecyclerView.NO_POSITION) {
                                         notifyItemChanged(adapterPosition)
@@ -72,10 +73,12 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
         }
     }
 
-    fun updateTransaction(transaction: TransactionCrypto) {
+    fun updateTransaction(transaction: TransactionCrypto, position: Int) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         val view = LayoutInflater.from(context).inflate(R.layout.layout_add_transaction_popup, null)
         builder.setView(view)
+        val handler = Handler()
+        val dialog = builder.create()
         view.add_button.setOnClickListener {
             transaction.currencyCode = view.currency_code_edit_text.text.toString()
             transaction.amount = view.amount_edit_text.text.toString().toDouble()
@@ -83,9 +86,15 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
             transaction.rate = view.rate_edit_text.text.toString().toDouble()
             thread {
                 transaction.save()
+                handler.post {
+                    dialog.dismiss()
+                    handler.postDelayed({
+                        notifyItemChanged(position)
+                    }, 500)
+                }
             }
         }
-        builder.create().show()
+        dialog.show()
     }
 
     fun deleteTransaction(transaction: TransactionCrypto) {

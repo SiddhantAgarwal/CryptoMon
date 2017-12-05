@@ -35,26 +35,26 @@ class MainAdapter(private val dataList: ArrayList<HashMap<String, Any>>, val con
 
                 itemView.currency_value_textview.text = ""
                 value?.let {
-                    val currValue = context.getString(R.string.currency_value_string, it.toString())
-                    itemView.currency_value_textview.text = currValue
+                    itemView.currency_value_textview.text = context.getString(
+                            R.string.currency_value_string, it.toString())
                 }
 
                 itemView.last_traded_price_textView.text = ""
                 ltp?.let {
-                    val ltpValue = context.getString(R.string.currency_value_string, it.toString())
-                    itemView.last_traded_price_textView.text = ltpValue
+                    itemView.last_traded_price_textView.text = context.getString(
+                            R.string.currency_value_string, it.toString())
                 }
 
                 itemView.highest_bid_textView.text = ""
                 hb?.let {
-                    val hbValue = context.getString(R.string.currency_value_string, it.toString())
-                    itemView.highest_bid_textView.text = hbValue
+                    itemView.highest_bid_textView.text = context.getString(
+                            R.string.currency_value_string, it.toString())
                 }
 
                 itemView.lowest_ask_textView.text = ""
                 la?.let {
-                    val laValue = context.getString(R.string.currency_value_string, it.toString())
-                    itemView.lowest_ask_textView.text = laValue
+                    itemView.lowest_ask_textView.text = context.getString(
+                            R.string.currency_value_string, it.toString())
                 }
                 val resourceId = context.resources.getIdentifier(code.toLowerCase(), "drawable", context.packageName)
                 itemView.currency_symbol_imageview.setImageDrawable(context.getDrawable(resourceId))

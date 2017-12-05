@@ -2,5 +2,5 @@
     <string name="app_name">CryptoMon</string>
     <string name="url_for_data">https://koinex.in/api/ticker</string>
     <string name="currency_value_string">₹ %1$s</string>
-    <string name="currency_valuation_string">\@ ₹ %1$s</string>
+    <string name="currency_valuation_string">\@  ₹ %1$s</string>
 </resources>

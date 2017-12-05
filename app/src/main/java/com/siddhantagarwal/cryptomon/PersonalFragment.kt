@@ -3,6 +3,7 @@ package com.siddhantagarwal.cryptomon
 import android.app.AlertDialog
 import android.app.Fragment
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -21,7 +22,6 @@ import kotlin.concurrent.thread
  */
 
 class PersonalFragment : Fragment() {
-    private lateinit var transactionRecyclerView: RecyclerView
     private lateinit var transactionArrayList: ArrayList<TransactionCrypto>
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -50,12 +50,12 @@ class PersonalFragment : Fragment() {
 
     private fun refreshTransactionRecycler() {
         try {
-            transactionArrayList = ArrayList()
-            SugarRecord.findAll(TransactionCrypto::class.java).forEach {
-                Utility.logDebug("Transaction", it.toString())
+            val findAll = SugarRecord.findAll(TransactionCrypto::class.java)
+            transactionArrayList.clear()
+            findAll.forEach {
                 transactionArrayList.add(it)
             }
-            transactionRecyclerView.adapter.notifyDataSetChanged()
+            transaction_recycler_view.adapter.notifyDataSetChanged()
         } catch (e: Exception) {
             Utility.logError("Error", e.message)
         }
@@ -66,17 +66,24 @@ class PersonalFragment : Fragment() {
             val builder: AlertDialog.Builder = AlertDialog.Builder(it)
             val view = LayoutInflater.from(it).inflate(R.layout.layout_add_transaction_popup, null)
             builder.setView(view)
-            currency_code_edit_text
+            val dialog = builder.create()
+            val handler = Handler()
             view.add_button.setOnClickListener {
                 val transaction = TransactionCrypto(view.currency_code_edit_text.text.toString(),
                         view.amount_edit_text.text.toString().toDouble(),
-                        quantity_edit_text.text.toString().toDouble(),
-                        rate_edit_text.text.toString().toDouble())
+                        view.quantity_edit_text.text.toString().toDouble(),
+                        view.rate_edit_text.text.toString().toDouble())
                 thread {
                     transaction.save()
+                    handler.post {
+                        dialog.dismiss()
+                        handler.postDelayed({
+                            refreshTransactionRecycler()
+                        }, 500)
+                    }
                 }
             }
-            return builder.create()
+            return dialog
         }
         return null
     }

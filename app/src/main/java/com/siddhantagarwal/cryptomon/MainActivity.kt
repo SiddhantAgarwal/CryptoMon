@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottom_navigation_view.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
+            when(it.itemId) {
                 R.id.watch_tab -> pushFragment(watchFragment)
                 R.id.personal_tab -> pushFragment(personalFragment)
                 else -> Utility.logDebug(TAG, "I am also looking for satoshi nakamoto")

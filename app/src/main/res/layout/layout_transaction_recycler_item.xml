@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="110dp"
     android:padding="4dp">
 
     <android.support.v7.widget.CardView
@@ -11,7 +11,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            >
 
             <TextView
                 android:id="@+id/quantity_text_view"
@@ -25,10 +27,11 @@
                 android:id="@+id/currency_code_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/quantity_text_view"
                 android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/quantity_text_view"
                 android:text="BTC"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,6 +50,16 @@
                 android:layout_marginLeft="8dp"
                 android:text="@string/currency_value_string"
                 android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/options_button"
+                android:layout_height="32dp"
+                android:layout_width="32dp"
+                android:src="@drawable/ic_more_vert"
+                android:tint="@color/grey"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

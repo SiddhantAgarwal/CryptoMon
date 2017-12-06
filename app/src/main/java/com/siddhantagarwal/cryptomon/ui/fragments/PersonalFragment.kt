@@ -74,7 +74,8 @@ class PersonalFragment : Fragment() {
             val dialog = builder.create()
             val handler = Handler()
             view.add_button.setOnClickListener {
-                val transaction = TransactionCrypto(view.currency_code_edit_text.text.toString(),
+                val transaction = TransactionCrypto(
+                        view.currency_code_edit_text.text.toString().toUpperCase(),
                         view.amount_edit_text.text.toString().toDouble(),
                         view.quantity_edit_text.text.toString().toDouble(),
                         view.rate_edit_text.text.toString().toDouble())

@@ -1,8 +1,6 @@
 package com.siddhantagarwal.cryptomon.models
 
-import android.app.Application
 import com.orm.SugarRecord
-import com.siddhantagarwal.cryptomon.R
 import com.siddhantagarwal.cryptomon.Utility
 import org.json.JSONObject
 
@@ -29,6 +27,17 @@ class Currency(): SugarRecord() {
     }
 
     companion object {
+
+        fun findCurrencyByCode(code: String): Currency? {
+            val currency = SugarRecord.find(Currency::class.java, "CODE = '${code}'")
+            if(currency.size > 0) {
+                currency[0]?.let {
+                    return it
+                }
+            }
+            return null
+        }
+
         fun syncFromServer() {
             val response = Utility.fetchDataFromURL("https://koinex.in/api/ticker")
             response?.let {

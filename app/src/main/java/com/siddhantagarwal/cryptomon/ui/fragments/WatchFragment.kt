@@ -50,6 +50,7 @@ class WatchFragment : Fragment() {
     private fun refreshDataFromServer(listCurrencies: ArrayList<HashMap<String, Any>>, adapter: MainAdapter) {
         thread {
             Currency.syncFromServer()
+            listCurrencies.clear()
             SugarRecord.findAll(Currency::class.java).forEach {
                 val mapOb = HashMap<String, Any>()
                 mapOb["expanded"] = false

@@ -34,25 +34,21 @@ class MainAdapter(private val dataList: ArrayList<HashMap<String, Any>>, val con
         fun bindItems(entry: HashMap<String, Any>) {
             with(entry["currency"] as Currency) {
                 itemView.currency_name_textview.text = code
-
                 itemView.currency_value_textview.text = ""
                 value?.let {
                     itemView.currency_value_textview.text = context.getString(
                             R.string.currency_value_string, it.toString())
                 }
-
                 itemView.last_traded_price_textView.text = ""
                 ltp?.let {
                     itemView.last_traded_price_textView.text = context.getString(
                             R.string.currency_value_string, it.toString())
                 }
-
                 itemView.highest_bid_textView.text = ""
                 hb?.let {
                     itemView.highest_bid_textView.text = context.getString(
                             R.string.currency_value_string, it.toString())
                 }
-
                 itemView.lowest_ask_textView.text = ""
                 la?.let {
                     itemView.lowest_ask_textView.text = context.getString(
@@ -61,7 +57,6 @@ class MainAdapter(private val dataList: ArrayList<HashMap<String, Any>>, val con
                 val resourceId = context.resources.getIdentifier(code?.toLowerCase(), "drawable", context.packageName)
                 itemView.currency_symbol_imageview.setImageDrawable(context.getDrawable(resourceId))
             }
-
             itemView.more_button.setOnClickListener {
                 val detailsView = itemView.findViewById<LinearLayout>(R.id.details_layout)
                 if (entry["expanded"] as Boolean) {

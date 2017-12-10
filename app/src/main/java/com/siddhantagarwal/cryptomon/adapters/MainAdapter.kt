@@ -58,13 +58,12 @@ class MainAdapter(private val dataList: ArrayList<HashMap<String, Any>>, val con
                 itemView.currency_symbol_imageview.setImageDrawable(context.getDrawable(resourceId))
             }
             itemView.more_button.setOnClickListener {
-                val detailsView = itemView.findViewById<LinearLayout>(R.id.details_layout)
                 if (entry["expanded"] as Boolean) {
-                    detailsView.visibility = View.GONE
+                    itemView.details_layout.visibility = View.GONE
                     entry["expanded"] = false
                     itemView.more_button.setImageResource(R.drawable.ic_expand)
                 } else {
-                    detailsView.visibility = View.VISIBLE
+                    itemView.details_layout.visibility = View.VISIBLE
                     entry["expanded"] = true
                     itemView.more_button.setImageResource(R.drawable.ic_expand_less_black_24dp)
                 }

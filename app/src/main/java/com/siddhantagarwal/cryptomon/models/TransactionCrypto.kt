@@ -16,4 +16,20 @@ class TransactionCrypto(): SugarRecord() {
         this.quantity = quantity
         this.rate = rate
     }
+
+    companion object {
+        fun compareWithCurrentPrice(rate: Double, currencyCode: String): Int {
+            val find = SugarRecord.find(Currency::class.java,
+                    "CODE = '$currencyCode'")
+            find[0]?.let {
+                return when {
+                    it.value!! > rate -> 1
+                    it.value!! == rate -> 0
+                    it.value!! < rate -> -1
+                    else -> -999
+                }
+            }
+            return -999
+        }
+    }
 }

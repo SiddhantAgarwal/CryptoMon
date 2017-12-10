@@ -88,15 +88,25 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                     selectItem(adapterPosition)
                     true
                 }
-                var currency : Currency? = null
                 currencyCode?.let {
                     itemView.currency_code_text_view.text = it
-                    currency = Currency.findCurrencyByCode(currencyCode!!)
                 }
                 quantity?.let {
                     itemView.quantity_text_view.text = quantity.toString()
                 }
                 rate?.let {
+                    if (TransactionCrypto.compareWithCurrentPrice(rate!!, currencyCode!!) < 0) {
+                        itemView.movement_image_view.setImageResource(R.drawable.ic_caret_down)
+                        itemView.movement_image_view.drawable.setTint(Color.RED)
+                    } else {
+                        itemView.movement_image_view.setImageResource(R.drawable.ic_caret_up)
+                        itemView.movement_image_view.drawable.setTint(Color.GREEN)
+                    }
+                    val current = Currency.getRateForCurrency(currencyCode!!)!! * quantity!!
+                    current.let {
+                        itemView.current_value_text_view.text = context.getString(
+                                R.string.currency_holding_current_string, "%.2f".format(it))
+                    }
                     itemView.valuation_text_view.text = context.getString(
                             R.string.currency_valuation_string,
                             rate.toString())
@@ -105,21 +115,6 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                     itemView.total_amount_text_view.text = context.getString(
                             R.string.currency_holding_invested_string,
                             amount.toString())
-                }
-                var current: Double? = null
-                currency?.let {
-                    if (it.value!! < rate!!.toDouble()) {
-                        itemView.movement_image_view.setImageResource(R.drawable.ic_caret_down)
-                        itemView.movement_image_view.drawable.setTint(Color.RED)
-                    } else {
-                        itemView.movement_image_view.setImageResource(R.drawable.ic_caret_up)
-                        itemView.movement_image_view.drawable.setTint(Color.GREEN)
-                    }
-                    current = it.value!! * quantity!!
-                }
-                current?.let {
-                    itemView.current_value_text_view.text = context.getString(
-                            R.string.currency_holding_current_string, "%.2f".format(it))
                 }
                 itemView.edit_button.setOnClickListener {
                     updateTransaction(transactionList[adapterPosition], adapterPosition)

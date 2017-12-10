@@ -43,13 +43,21 @@ class Currency(): SugarRecord() {
         }
 
         fun findCurrencyByCode(code: String): Currency? {
-            val currency = SugarRecord.find(Currency::class.java, "CODE = '$code'")
-            if(currency.size > 0) {
-                currency[0]?.let {
-                    return it
-                }
+            val find = SugarRecord.find(Currency::class.java, "CODE = '$code'")
+            return if (find.size > 0) {
+                find[0]
+            } else {
+                null
             }
-            return null
+        }
+
+        fun getRateForCurrency(code: String): Double? {
+            val find = SugarRecord.find(Currency::class.java, "CODE = '$code'")
+            return if (find.size > 0) {
+                find[0].value
+            } else {
+                null
+            }
         }
 
         fun syncFromServer() {

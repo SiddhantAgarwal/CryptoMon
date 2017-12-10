@@ -8,11 +8,10 @@ import android.support.v7.view.ActionMode
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import com.siddhantagarwal.cryptomon.R
-import com.siddhantagarwal.cryptomon.models.TransactionCrypto
 import com.siddhantagarwal.cryptomon.models.Currency
+import com.siddhantagarwal.cryptomon.models.TransactionCrypto
 import kotlinx.android.synthetic.main.layout_add_transaction_popup.view.*
 import kotlinx.android.synthetic.main.layout_transaction_recycler_item.view.*
-import kotlin.collections.ArrayList
 import kotlin.concurrent.thread
 
 /**
@@ -23,6 +22,41 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
 
     var multiSelect = false
     val selectedItems = ArrayList<Int>()
+    val contextAction = object : ActionMode.Callback {
+        override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+            multiSelect = true
+            menu?.let {
+                context.menuInflater.inflate(R.menu.transactions_contextual_menu, menu)
+            }
+            return true
+        }
+
+        override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+            when (item?.itemId) {
+                R.id.delete -> {
+                    deleteTransactions()
+                    notifyDataSetChanged()
+                    mode?.finish()
+                }
+                R.id.select_all -> {
+                    selectedItems.clear()
+                    transactionList.mapTo(selectedItems) { transactionList.indexOf(it) }
+                    notifyDataSetChanged()
+                }
+            }
+            return true
+        }
+
+        override fun onDestroyActionMode(mode: ActionMode?) {
+            multiSelect = false
+            selectedItems.clear()
+            notifyDataSetChanged()
+        }
+
+        override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+            return false
+        }
+    }
 
     override fun getItemCount(): Int {
         return transactionList.size
@@ -50,41 +84,7 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                     selectItem(adapterPosition)
                 }
                 itemView.setOnLongClickListener {
-                    context.startSupportActionMode(object : ActionMode.Callback {
-                        override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                            multiSelect = true
-                            menu?.let {
-                                context.menuInflater.inflate(R.menu.transactions_contextual_menu, menu)
-                            }
-                            return true
-                        }
-
-                        override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-                            when (item?.itemId) {
-                                R.id.delete -> {
-                                    deleteTransactions()
-                                    notifyDataSetChanged()
-                                    mode?.finish()
-                                }
-                                R.id.select_all -> {
-                                    selectedItems.clear()
-                                    transactionList.mapTo(selectedItems) { transactionList.indexOf(it) }
-                                    notifyDataSetChanged()
-                                }
-                            }
-                            return true
-                        }
-
-                        override fun onDestroyActionMode(mode: ActionMode?) {
-                            multiSelect = false
-                            selectedItems.clear()
-                            notifyDataSetChanged()
-                        }
-
-                        override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                            return false
-                        }
-                    })
+                    context.startSupportActionMode(contextAction)
                     selectItem(adapterPosition)
                     true
                 }
@@ -93,7 +93,6 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                     itemView.currency_code_text_view.text = it
                     currency = Currency.findCurrencyByCode(currencyCode!!)
                 }
-
                 quantity?.let {
                     itemView.quantity_text_view.text = quantity.toString()
                 }
@@ -107,7 +106,6 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                             R.string.currency_holding_invested_string,
                             amount.toString())
                 }
-
                 var current: Double? = null
                 currency?.let {
                     if (it.value!! < rate!!.toDouble()) {
@@ -123,7 +121,6 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                     itemView.current_value_text_view.text = context.getString(
                             R.string.currency_holding_current_string, "%.2f".format(it))
                 }
-
                 itemView.edit_button.setOnClickListener {
                     updateTransaction(transactionList[adapterPosition], adapterPosition)
                 }

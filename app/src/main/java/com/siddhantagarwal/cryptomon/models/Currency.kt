@@ -28,8 +28,22 @@ class Currency(): SugarRecord() {
 
     companion object {
 
+        fun listAllCurrencies(): ArrayList<Currency>? {
+            val listOfCurrencies: ArrayList<Currency> = ArrayList()
+            SugarRecord.findAll(Currency::class.java).forEach {
+                it?.let {
+                    listOfCurrencies.add(it)
+                }
+            }
+            return if (listOfCurrencies.size > 0) {
+                listOfCurrencies
+            } else {
+                null
+            }
+        }
+
         fun findCurrencyByCode(code: String): Currency? {
-            val currency = SugarRecord.find(Currency::class.java, "CODE = '${code}'")
+            val currency = SugarRecord.find(Currency::class.java, "CODE = '$code'")
             if(currency.size > 0) {
                 currency[0]?.let {
                     return it

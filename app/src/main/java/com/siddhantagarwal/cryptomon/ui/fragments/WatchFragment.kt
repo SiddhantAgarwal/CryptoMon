@@ -7,13 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.orm.SugarRecord
-import com.siddhantagarwal.cryptomon.models.Currency
-import com.siddhantagarwal.cryptomon.adapters.MainAdapter
 import com.siddhantagarwal.cryptomon.R
-import com.siddhantagarwal.cryptomon.Utility
-import com.siddhantagarwal.cryptomon.models.TransactionCrypto
+import com.siddhantagarwal.cryptomon.adapters.MainAdapter
+import com.siddhantagarwal.cryptomon.models.Currency
 import kotlinx.android.synthetic.main.layout_fragment_watch.*
-import org.json.JSONObject
 import kotlin.concurrent.thread
 
 /**

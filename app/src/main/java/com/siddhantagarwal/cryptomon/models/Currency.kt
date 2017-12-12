@@ -12,6 +12,7 @@ import org.json.JSONObject
  * Didn't use kotlin data class because need a empty constructor
  */
 
+// codebeat:disable[TOO_MANY_IVARS,ARITY]
 class Currency(): SugarRecord() {
     var code: String? = ""
     var value: Double? = 0.0

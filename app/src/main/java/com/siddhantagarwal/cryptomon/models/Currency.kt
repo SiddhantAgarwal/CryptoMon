@@ -14,7 +14,7 @@ import org.json.JSONObject
 
 
 class Currency(): SugarRecord() {
-    // codebeat:disable[TOO_MANY_IVARS,ARITY]
+    // codebeat:enable[TOO_MANY_IVARS,ARITY]
     var code: String? = ""
     var value: Double? = 0.0
     var ltp: Double? = null

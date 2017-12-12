@@ -27,10 +27,12 @@ import kotlin.concurrent.thread
 class PersonalFragment : Fragment() {
     private lateinit var transactionArrayList: ArrayList<TransactionCrypto>
 
+    // codebeat:disable[TOO_MANY_IVARS,ARITY]
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         return inflater!!.inflate(R.layout.layout_fragment_personal, container, false)
     }
+    // codebeat:disable[TOO_MANY_IVARS,ARITY]
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

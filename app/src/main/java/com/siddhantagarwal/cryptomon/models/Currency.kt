@@ -12,8 +12,9 @@ import org.json.JSONObject
  * Didn't use kotlin data class because need a empty constructor
  */
 
-// codebeat:enable[TOO_MANY_IVARS,ARITY]
+
 class Currency(): SugarRecord() {
+    // codebeat:disable[TOO_MANY_IVARS,ARITY]
     var code: String? = ""
     var value: Double? = 0.0
     var ltp: Double? = null
@@ -26,6 +27,7 @@ class Currency(): SugarRecord() {
         this.la = la
         this.hb = hb
     }
+    // codebeat:enable[TOO_MANY_IVARS,ARITY]
     companion object {
 
         fun listAllCurrencies(): ArrayList<Currency>? {

@@ -26,8 +26,6 @@ class Currency(): SugarRecord() {
         this.la = la
         this.hb = hb
     }
-    // codebeat:disable[TOO_MANY_IVARS,ARITY]
-
     companion object {
 
         fun listAllCurrencies(): ArrayList<Currency>? {

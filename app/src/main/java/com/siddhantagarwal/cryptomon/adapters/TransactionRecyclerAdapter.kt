@@ -10,6 +10,7 @@ import android.view.*
 import com.siddhantagarwal.cryptomon.R
 import com.siddhantagarwal.cryptomon.models.Currency
 import com.siddhantagarwal.cryptomon.models.TransactionCrypto
+import com.siddhantagarwal.cryptomon.setTextIfNotNull
 import kotlinx.android.synthetic.main.layout_add_transaction_popup.view.*
 import kotlinx.android.synthetic.main.layout_transaction_recycler_item.view.*
 import kotlin.concurrent.thread
@@ -88,12 +89,8 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                     selectItem(adapterPosition)
                     true
                 }
-                currencyCode?.let {
-                    itemView.currency_code_text_view.text = it
-                }
-                quantity?.let {
-                    itemView.quantity_text_view.text = quantity.toString()
-                }
+                itemView.currency_code_text_view.setTextIfNotNull(currencyCode)
+                itemView.quantity_text_view.setTextIfNotNull(quantity.toString())
                 rate?.let {
                     if (TransactionCrypto.compareWithCurrentPrice(rate!!, currencyCode!!) < 0) {
                         itemView.movement_image_view.setImageResource(R.drawable.ic_caret_down)
@@ -103,19 +100,14 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                         itemView.movement_image_view.drawable.setTint(Color.GREEN)
                     }
                     val current = Currency.getRateForCurrency(currencyCode!!)!! * quantity!!
-                    current.let {
-                        itemView.current_value_text_view.text = context.getString(
-                                R.string.currency_holding_current_string, "%.2f".format(it))
-                    }
-                    itemView.valuation_text_view.text = context.getString(
+                    itemView.current_value_text_view.setTextIfNotNull(current.toString())
+                    itemView.valuation_text_view.setTextIfNotNull(context.getString(
                             R.string.currency_valuation_string,
-                            rate.toString())
+                            rate.toString()))
                 }
-                amount?.let {
-                    itemView.total_amount_text_view.text = context.getString(
-                            R.string.currency_holding_invested_string,
-                            amount.toString())
-                }
+                itemView.total_amount_text_view.setTextIfNotNull(context.getString(
+                        R.string.currency_holding_invested_string,
+                        amount.toString()))
                 itemView.edit_button.setOnClickListener {
                     updateTransaction(transactionList[adapterPosition], adapterPosition)
                 }

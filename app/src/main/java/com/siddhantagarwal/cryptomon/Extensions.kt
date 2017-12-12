@@ -1,6 +1,7 @@
 package com.siddhantagarwal.cryptomon
 
 import android.content.Context
+import android.widget.TextView
 import android.widget.Toast
 
 /**
@@ -9,5 +10,12 @@ import android.widget.Toast
 fun Context.showDebugToast(text: String) {
     if (Config.debugMode) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    }
+}
+
+fun TextView.setTextIfNotNull(text: String?) {
+    this.text = ""
+    text.let {
+        this.text = text
     }
 }

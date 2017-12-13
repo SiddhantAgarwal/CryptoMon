@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "898700047291",
+    "firebase_url": "https://cryptomon-212ce.firebaseio.com",
+    "project_id": "cryptomon-212ce",
+    "storage_bucket": "cryptomon-212ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898700047291:android:b73e8ce2bed44db7",
+        "android_client_info": {
+          "package_name": "com.siddhantagarwal.cryptomon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898700047291-mium70fv9aorac4apjc1ch644j3e3hnk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4YO_YKjzoglNXCZAQIRxY3OS2PyLFn1U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

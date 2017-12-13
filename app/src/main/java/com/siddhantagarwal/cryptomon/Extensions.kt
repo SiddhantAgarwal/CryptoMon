@@ -15,7 +15,7 @@ fun Context.showDebugToast(text: String) {
 
 fun TextView.setTextIfNotNull(text: String?) {
     this.text = ""
-    text.let {
-        this.text = text
+    text?.let {
+        this.text = it
     }
 }

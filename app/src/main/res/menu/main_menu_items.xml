@@ -6,4 +6,7 @@
     <item android:id="@+id/personal_tab"
         android:title="Personal"
         android:icon="@drawable/ic_perm_identity_black_24dp" />
+    <item android:id="@+id/news_tab"
+        android:title="News"
+        android:icon="@drawable/ic_view_headline_black_24dp" />
 </menu>

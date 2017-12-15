@@ -1,6 +1,5 @@
 package com.siddhantagarwal.cryptomon.ui.fragments
 
-import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -16,7 +15,7 @@ import kotlin.concurrent.thread
 /**
  * Created by siddhant on 30/11/17.
  */
-class WatchFragment : Fragment() {
+class WatchFragment : android.support.v4.app.Fragment() {
     private lateinit var listCurrencies: ArrayList<HashMap<String, Any>>
     private lateinit var adapter: MainAdapter
 

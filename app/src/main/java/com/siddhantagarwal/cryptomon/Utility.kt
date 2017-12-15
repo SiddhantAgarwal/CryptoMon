@@ -24,6 +24,7 @@ class Utility {
                             response.append(inputLine)
                         }
                         inputStream.close()
+                        this.disconnect()
                         return response.toString()
                     }
                 } catch (e: Exception) {

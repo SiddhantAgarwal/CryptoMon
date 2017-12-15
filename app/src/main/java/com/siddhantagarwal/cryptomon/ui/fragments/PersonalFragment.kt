@@ -1,7 +1,6 @@
 package com.siddhantagarwal.cryptomon.ui.fragments
 
 import android.app.AlertDialog
-import android.app.Fragment
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
@@ -24,7 +23,7 @@ import kotlin.concurrent.thread
  * Created by siddhant on 30/11/17.
  */
 
-class PersonalFragment : Fragment() {
+class PersonalFragment : android.support.v4.app.Fragment() {
     private lateinit var transactionArrayList: ArrayList<TransactionCrypto>
 
     // codebeat:enable[TOO_MANY_IVARS,ARITY]

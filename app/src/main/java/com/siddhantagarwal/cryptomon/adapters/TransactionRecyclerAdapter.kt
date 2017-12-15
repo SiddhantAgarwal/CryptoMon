@@ -100,7 +100,9 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                         itemView.movement_image_view.drawable.setTint(Color.GREEN)
                     }
                     val current = Currency.getRateForCurrency(currencyCode!!)!! * quantity!!
-                    itemView.current_value_text_view.setTextIfNotNull(current.toString())
+                    itemView.current_value_text_view.setTextIfNotNull(context.getString(
+                            R.string.currency_holding_current_string,
+                            current.toString()))
                     itemView.valuation_text_view.setTextIfNotNull(context.getString(
                             R.string.currency_valuation_string,
                             rate.toString()))

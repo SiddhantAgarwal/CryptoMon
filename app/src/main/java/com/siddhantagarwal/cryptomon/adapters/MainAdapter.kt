@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import com.siddhantagarwal.cryptomon.R
 import com.siddhantagarwal.cryptomon.models.Currency
 import com.siddhantagarwal.cryptomon.setTextIfNotNull

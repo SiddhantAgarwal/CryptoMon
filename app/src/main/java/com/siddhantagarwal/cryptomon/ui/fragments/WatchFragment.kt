@@ -18,6 +18,8 @@ import kotlin.concurrent.thread
 class WatchFragment : android.support.v4.app.Fragment() {
     private lateinit var listCurrencies: ArrayList<HashMap<String, Any>>
     private lateinit var adapter: MainAdapter
+    val TAG = "watch"
+
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater!!.inflate(R.layout.layout_fragment_watch, container, false)

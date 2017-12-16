@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CryptoMon</string>
     <string name="url_for_data">https://koinex.in/api/ticker</string>
+    <string name="url_for_news">https://newsapi.org/v2/everything?q=%1$s&amp;sortBy=publishedAt&amp;apiKey=%2$s&amp;language=en</string>
     <string name="currency_value_string">₹ %1$s</string>
     <string name="currency_valuation_string">Invested \@ ₹ %1$s</string>
     <string name="currency_holding_invested_string">Invested Value ₹ %1$s</string>

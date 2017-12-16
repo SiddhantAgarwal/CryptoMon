@@ -25,6 +25,7 @@ import kotlin.concurrent.thread
 
 class PersonalFragment : android.support.v4.app.Fragment() {
     private lateinit var transactionArrayList: ArrayList<TransactionCrypto>
+    val TAG = "personal"
 
     // codebeat:enable[TOO_MANY_IVARS,ARITY]
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,

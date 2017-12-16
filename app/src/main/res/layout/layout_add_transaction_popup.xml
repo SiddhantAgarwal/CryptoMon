@@ -16,6 +16,7 @@
         android:layout_height="1dp"
         android:layout_width="match_parent"
         android:background="@color/grey"
+        android:alpha="0.2"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
-            android:text="Amount invested:"
+            android:text="Investment:"
             android:textSize="20sp" />
         <EditText
             android:layout_width="match_parent"
@@ -94,13 +95,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
         <Button
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:id="@+id/add_button"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:text="Add"
+            android:textColor="@color/white"
             android:layout_marginRight="8dp"
             />
     </RelativeLayout>

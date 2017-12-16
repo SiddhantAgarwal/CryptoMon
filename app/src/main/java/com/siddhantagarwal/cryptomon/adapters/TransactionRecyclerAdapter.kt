@@ -110,9 +110,6 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                 itemView.total_amount_text_view.setTextIfNotNull(context.getString(
                         R.string.currency_holding_invested_string,
                         amount.toString()))
-                itemView.edit_button.setOnClickListener {
-                    updateTransaction(transactionList[adapterPosition], adapterPosition)
-                }
             }
         }
 
@@ -127,30 +124,6 @@ class TransactionRecyclerAdapter(private val transactionList: ArrayList<Transact
                 }
             }
         }
-    }
-
-    fun updateTransaction(transaction: TransactionCrypto, position: Int) {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-        val view = LayoutInflater.from(context).inflate(R.layout.layout_add_transaction_popup, null)
-        builder.setView(view)
-        val handler = Handler()
-        val dialog = builder.create()
-        view.add_button.setOnClickListener {
-            transaction.currencyCode = view.currency_code_edit_text.text.toString().toUpperCase()
-            transaction.amount = view.amount_edit_text.text.toString().toDouble()
-            transaction.quantity = view.quantity_edit_text.text.toString().toDouble()
-            transaction.rate = view.rate_edit_text.text.toString().toDouble()
-            thread {
-                transaction.save()
-                handler.post {
-                    dialog.dismiss()
-                    handler.postDelayed({
-                        notifyItemChanged(position)
-                    }, 500)
-                }
-            }
-        }
-        dialog.show()
     }
 
     fun deleteTransactions() {

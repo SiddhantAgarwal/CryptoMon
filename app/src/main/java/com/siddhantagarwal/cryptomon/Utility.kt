@@ -24,12 +24,14 @@ class Utility {
                             response.append(inputLine)
                         }
                         inputStream.close()
-                        this.disconnect()
                         return response.toString()
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
                     return null
+                } finally {
+                    this.inputStream.close()
+                    this.disconnect()
                 }
             }
         }

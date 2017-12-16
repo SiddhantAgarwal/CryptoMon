@@ -78,15 +78,6 @@
                 android:text="@string/currency_holding_current_string"
                 android:textSize="20dp" />
 
-            <ImageView
-                android:id="@+id/edit_button"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="8dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_edit"
-                android:tint="@color/grey" />
         </RelativeLayout>
     </RelativeLayout>
 

@@ -46,7 +46,7 @@ class MainAdapter(private val dataList: ArrayList<HashMap<String, Any>>, val con
                         "drawable", context.packageName)
                 itemView.currency_symbol_imageview.setImageDrawable(context.getDrawable(resourceId))
             }
-            itemView.more_button.setOnClickListener {
+            itemView.setOnClickListener {
                 if (entry["expanded"] as Boolean) {
                     itemView.details_layout.visibility = View.GONE
                     entry["expanded"] = false

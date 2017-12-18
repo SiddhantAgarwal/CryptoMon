@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.siddhantagarwal.cryptomon.R
 import com.siddhantagarwal.cryptomon.Utility
+import com.siddhantagarwal.cryptomon.adapters.MainPagerAdapter
 import com.siddhantagarwal.cryptomon.ui.fragments.NewsFragment
 import com.siddhantagarwal.cryptomon.ui.fragments.PersonalFragment
 import com.siddhantagarwal.cryptomon.ui.fragments.WatchFragment
@@ -20,27 +21,29 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupPagerAdapter()
+        root_layout.offscreenPageLimit = 3
         bottom_navigation_view.setOnNavigationItemSelectedListener {
             when(it.itemId) {
-                R.id.watch_tab -> pushFragment(watchFragment)
-                R.id.personal_tab -> pushFragment(personalFragment)
-                R.id.news_tab -> pushFragment(newsFragment)
+                R.id.watch_tab -> root_layout.currentItem = 0
+                R.id.personal_tab -> root_layout.currentItem = 1
+                R.id.news_tab -> root_layout.currentItem = 2
                 else -> Utility.logDebug(TAG, "I am also looking for satoshi nakamoto")
             }
             true
         }
-        watchFragment = WatchFragment()
-        personalFragment = PersonalFragment()
-        newsFragment = NewsFragment()
-        pushFragment(watchFragment)
     }
 
-    private fun pushFragment(fragment: android.support.v4.app.Fragment) {
-        supportFragmentManager?.let {
-            it.beginTransaction()?.let {
-                it.replace(R.id.root_layout, fragment)
-                it.commit()
-            }
-        }
+    private fun setupPagerAdapter() {
+        val adapter = MainPagerAdapter(supportFragmentManager, 3)
+        this.watchFragment = WatchFragment()
+        this.personalFragment = PersonalFragment()
+        this.newsFragment = NewsFragment()
+        adapter.addFragment(watchFragment)
+        adapter.addFragment(personalFragment)
+        adapter.addFragment(newsFragment)
+        root_layout.adapter = adapter
+        root_layout.currentItem = 0
     }
+
 }

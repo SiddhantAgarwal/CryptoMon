@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.siddhantagarwal.cryptomon.ui.activities.MainActivity">
 
-    <FrameLayout
+    <android.support.v4.view.ViewPager
         android:id="@+id/root_layout"
         android:layout_height="match_parent"
         android:layout_width="match_parent"

@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.layout_news_fragment.*
 class NewsFragment: android.support.v4.app.Fragment() {
     val TAG = "news"
 
-    lateinit var viewModel: NewsViewModel
+    private lateinit var viewModel: NewsViewModel
     // codebeat:enable[TOO_MANY_IVARS,ARITY]
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater!!.inflate(R.layout.layout_news_fragment, container, false)
@@ -32,7 +32,7 @@ class NewsFragment: android.support.v4.app.Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         viewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        viewModel.getNews(context.applicationContext, "bitcoin").observe(this, Observer {
+        viewModel.getNews(context.applicationContext, "crypto OR bitcoin OR ethereum OR litecoin").observe(this, Observer {
             it?.let {
                 with(news_recycler_view.adapter as NewsAdapter) {
                     this.replaceItems(it)

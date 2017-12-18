@@ -30,7 +30,6 @@ class Utility {
                     e.printStackTrace()
                     return null
                 } finally {
-                    this.inputStream.close()
                     this.disconnect()
                 }
             }

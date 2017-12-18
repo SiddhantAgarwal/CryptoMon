@@ -9,13 +9,16 @@ import org.json.JSONObject
 /**
  * Created by siddhant on 15/12/17.
  */
-
+// codebeat:disable[TOO_MANY_IVARS]
 class News() {
+
     var title: String? = null
     var description: String? = null
     var imgUrl: String? = null
     var source: String? = null
     var url: String? = null
+
+    // codebeat:disable[ARITY]
     constructor(title: String, description: String, imgUrl: String, source: String, url: String) : this() {
         this.title = title
         this.description = description
@@ -23,6 +26,7 @@ class News() {
         this.source = source
         this.url = url
     }
+    // codebeat:enable[ARITY]
 
     companion object {
         fun fetchNews(context: Context, newsType: String): ArrayList<News> {

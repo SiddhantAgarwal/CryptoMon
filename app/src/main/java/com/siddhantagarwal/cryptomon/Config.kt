@@ -5,6 +5,6 @@ package com.siddhantagarwal.cryptomon
  */
 class Config {
     companion object {
-        val debugMode = true
+        val debugMode = false
     }
 }

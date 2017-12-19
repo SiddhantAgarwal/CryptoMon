@@ -42,7 +42,6 @@ class WatchFragment : android.support.v4.app.Fragment() {
     private fun refreshRecycler() {
         swipe_refresh_layout.isRefreshing = true
         refreshDataFromServer(listCurrencies, adapter)
-        swipe_refresh_layout.isRefreshing = false
     }
 
     private fun refreshDataFromServer(listCurrencies: ArrayList<HashMap<String, Any>>, adapter: MainAdapter) {
@@ -56,7 +55,8 @@ class WatchFragment : android.support.v4.app.Fragment() {
                 listCurrencies.add(mapOb)
             }
             activity?.runOnUiThread {
-                adapter.notifyItemRangeChanged(0, listCurrencies.size)
+                adapter.notifyDataSetChanged()
+                swipe_refresh_layout.isRefreshing = false
             }
         }
     }

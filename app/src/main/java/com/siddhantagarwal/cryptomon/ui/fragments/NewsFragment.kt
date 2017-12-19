@@ -50,7 +50,6 @@ class NewsFragment: android.support.v4.app.Fragment() {
         news_refresh_layout.setOnRefreshListener {
             news_refresh_layout.isRefreshing = true
             viewModel.refreshNews(context.applicationContext, "bitcoin")
-            news_refresh_layout.isRefreshing = false
         }
         news_recycler_view.adapter = NewsAdapter(context)
         news_recycler_view.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

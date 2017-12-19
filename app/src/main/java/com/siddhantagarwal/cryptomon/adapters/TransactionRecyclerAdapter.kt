@@ -1,8 +1,6 @@
 package com.siddhantagarwal.cryptomon.adapters
 
-import android.app.AlertDialog
 import android.graphics.Color
-import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.view.ActionMode
 import android.support.v7.widget.RecyclerView
@@ -11,9 +9,7 @@ import com.siddhantagarwal.cryptomon.R
 import com.siddhantagarwal.cryptomon.models.Currency
 import com.siddhantagarwal.cryptomon.models.TransactionCrypto
 import com.siddhantagarwal.cryptomon.setTextIfNotNull
-import kotlinx.android.synthetic.main.layout_add_transaction_popup.view.*
 import kotlinx.android.synthetic.main.layout_transaction_recycler_item.view.*
-import kotlin.concurrent.thread
 
 /**
  * Created by siddhant on 01/12/17.
